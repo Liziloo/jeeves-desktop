@@ -1,0 +1,15 @@
+{
+  "name": "jeeves",
+  "version": "1.0.0",
+  "description": "A personal single-user desktop app that provides a ChatGPT-like chat experience using the OpenAI API that is inexpensive to run from a home server",
+  "license": "CC-BY-NC-4.0",
+  "author": "Liziloo",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"no tests yet\""
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
