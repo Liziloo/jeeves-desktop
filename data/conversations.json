@@ -11,6 +11,18 @@
       "title": "New Conversation",
       "created_at": "2025-12-14T11:29:55.667Z",
       "updated_at": "2025-12-14T11:58:46.674Z"
+    },
+    {
+      "id": "6520055e-9a9c-4c1c-8768-eaf02646e867",
+      "title": "New Conversation",
+      "created_at": "2025-12-14T12:27:58.804Z",
+      "updated_at": "2025-12-14T12:30:09.584Z"
+    },
+    {
+      "id": "1bfcc6f1-d5ca-4ff0-8efd-4850b2e9be7f",
+      "title": "New Conversation",
+      "created_at": "2025-12-14T12:35:31.694Z",
+      "updated_at": "2025-12-14T12:35:46.187Z"
     }
   ],
   "messages": [
@@ -37,6 +49,30 @@
       "role": "assistant",
       "content": "Hello! How can I assist you today?",
       "timestamp": "2025-12-14T11:58:46.674Z"
+    },
+    {
+      "conversation_id": "6520055e-9a9c-4c1c-8768-eaf02646e867",
+      "role": "user",
+      "content": "Continue what we were talking about earlier.",
+      "timestamp": "2025-12-14T12:30:08.022Z"
+    },
+    {
+      "conversation_id": "6520055e-9a9c-4c1c-8768-eaf02646e867",
+      "role": "assistant",
+      "content": "I don’t have access to previous parts of our conversation. Could you please remind me what we were discussing?",
+      "timestamp": "2025-12-14T12:30:09.584Z"
+    },
+    {
+      "conversation_id": "1bfcc6f1-d5ca-4ff0-8efd-4850b2e9be7f",
+      "role": "user",
+      "content": "Continue what we were talking about earlier.",
+      "timestamp": "2025-12-14T12:35:44.891Z"
+    },
+    {
+      "conversation_id": "1bfcc6f1-d5ca-4ff0-8efd-4850b2e9be7f",
+      "role": "assistant",
+      "content": "I don’t have the context of our previous conversation. Could you please remind me what we were discussing?",
+      "timestamp": "2025-12-14T12:35:46.187Z"
     }
   ]
 }

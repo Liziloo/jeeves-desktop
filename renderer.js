@@ -1,6 +1,7 @@
 const messagesDiv = document.getElementById("messages");
 const input = document.getElementById("input");
 const sendButton = document.getElementById("send");
+const newConversationButton = document.getElementById("newConversation");
 
 let conversationId = localStorage.getItem("conversationId");
 
@@ -12,6 +13,21 @@ async function startConversation() {
   const convo = await res.json();
   conversationId = convo.id;
   localStorage.setItem("conversationId", conversationId);
+}
+
+function clearUI() {
+  messagesDiv.innerHTML = "";
+  input.value = "";
+}
+
+async function startNewConversation() {
+  const res = await fetch("http://localhost:3000/conversations", {
+    method: "POST",
+  });
+  const convo = await res.json();
+  conversationId = convo.id;
+  localStorage.setItem("conversationId", conversationId);
+  clearUI();  
 }
 
 async function loadConversation(id) {
@@ -42,6 +58,11 @@ async function sendMessage() {
     await startConversation();
   }
 
+  // Render user message immediately
+  const userDiv = document.createElement("div");
+  userDiv.textContent = `You: ${content}`;
+  messagesDiv.appendChild(userDiv);
+
   const res = await fetch(
     `http://localhost:3000/conversations/${conversationId}/messages`,
     {
@@ -53,9 +74,9 @@ async function sendMessage() {
 
   const msg = await res.json();
 
-  const msgDiv = document.createElement("div");
-  msgDiv.textContent = `You: ${msg.content}`;
-  messagesDiv.appendChild(msgDiv);
+  const assistantDiv = document.createElement("div");
+  assistantDiv.textContent = `Assistant: ${msg.content}`;
+  messagesDiv.appendChild(assistantDiv);
 
   input.value = "";
 }
@@ -65,3 +86,4 @@ if (conversationId) {
 }
 
 sendButton.addEventListener("click", sendMessage);
+newConversationButton.addEventListener("click", startNewConversation);
