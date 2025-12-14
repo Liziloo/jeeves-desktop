@@ -5,11 +5,20 @@
   "license": "CC-BY-NC-4.0",
   "author": "Liziloo",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "backend": "node server.js",
+    "electron": "electron .",
+    "dev": "concurrently \"npm run backend\" \"npm run electron\"",
     "test": "echo \"no tests yet\""
   },
   "dependencies": {
-    "express": "^5.2.1"
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "openai": "^6.10.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "electron": "^39.2.7"
   }
 }
