@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+#app-shell {
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar {
+    width: 260px;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar-header {
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+}
+
+#conversationList {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.conversation-row {
+    padding: 8px 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+.conversation-row:hover {
+    background: #f0f0f0;
+}
+
+.conversation-row.active {
+    background: #e0e0ff;
+}
+
+.conversation-title {
+    font-size: 14px;
+}
+
+.conversation-date {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.rename-btn {
+    font-size: 11px;
+    margin-left: 6px;
+}

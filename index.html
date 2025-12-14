@@ -3,16 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <title>Jeeves</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="controls">
-      <button id="newConversation">New Conversation</button>
+    <div id="app-shell">
+      <aside id="sidebar">
+        <div id="sidebar-header">Conversations</div>
+        <div id="conversationList"></div>
+      </aside>
+
+      <main id="main">
+        <div id="controls">
+          <button id="newConversation">New Conversation</button>
+        </div>
+
+        <div id="messages"></div>
+
+        <input id="input" type="text" />
+        <button id="send">Send</button>
+      </main>
     </div>
-
-    <div id="messages"></div>
-
-    <input id="input" type="text" />
-    <button id="send">Send</button>
 
     <script src="renderer.js"></script>
   </body>

@@ -15,11 +15,18 @@ const TEMPERATURE = 0.2;
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-async function getAIResponse(userText) {
+async function getAIResponse(conversationId) {
+  const messages = store.messages
+    .filter((m) => m.conversation_id === conversationId)
+    .map((m) => ({
+      role: m.role,
+      content: m.content,
+    }));
+
   const response = await openai.chat.completions.create({
     model: MODEL,
     temperature: TEMPERATURE,
-    messages: [{ role: "user", content: userText }],
+    messages,
   });
 
   return response.choices[0].message.content;
@@ -59,6 +66,17 @@ function saveStore() {
 
 app.get("/health", (req, res) => {
   res.json({ ok: true });
+});
+
+// List conversations (title + date)
+app.get("/conversations", (req, res) => {
+  const conversations = [...store.conversations].sort((a, b) => {
+    const ad = a.updated_at || a.created_at;
+    const bd = b.updated_at || b.created_at;
+    return bd.localeCompare(ad);
+  });
+
+  res.json(conversations);
 });
 
 app.post("/conversations", async (req, res) => {
@@ -102,7 +120,7 @@ app.post("/conversations/:id/messages", async (req, res) => {
 
   // Phase 4: AI response ONLY when user sends message
   if (role === "user") {
-    const aiText = await getAIResponse(content);
+    const aiText = await getAIResponse(conversation.id);
 
     const assistantMessage = {
       conversation_id: conversation.id,
@@ -135,6 +153,27 @@ app.get("/conversations/:id", (req, res) => {
   );
 
   res.json({ conversation, messages });
+});
+
+// Rename conversation
+app.patch("/conversations/:id/rename", (req, res) => {
+  const title = req.body?.title === "string" ? req.body.title.trim() : "";
+
+  if (!title) {
+    return res.status(400).json({ error: "Title is required" });
+  }
+
+  const conversation = store.conversations.find((c) => c.id === req.params.id);
+
+  if (!conversation) {
+    return res.status(404).json({ error: "Conversation not found" });
+  }
+
+  conversation.title = title;
+  conversation.updated_at = new Date().toISOString();
+  saveStore();
+
+  res.json(conversation);
 });
 
 loadStore();
