@@ -3,6 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>Jeeves</title>
+    <meta http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self'; 
+        script-src 'self'; 
+        style-src 'self' 'unsafe-inline'; 
+        img-src 'self' data:; 
+        connect-src http://localhost:3000;" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -24,7 +31,18 @@
         <button id="send">Send</button>
       </main>
     </div>
-
+    <dialog id="renameDialog">
+      <form method="dialog">
+        <label>
+          New title:
+          <input id="renameInput" type="text" />
+        </label>
+        <menu>
+          <button value="cancel">Cancel</button>
+          <button value="confirm">Rename</button>
+        </menu>
+      </form>
+    </dialog>
     <script src="renderer.js"></script>
   </body>
 </html>

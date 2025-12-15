@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const newConversationButton = document.getElementById("newConversation");
   const conversationListDiv = document.getElementById("conversationList");
   const renameConversationButton = document.getElementById("renameConversation");
+  const renameDialog = document.getElementById("renameDialog");
+  const renameInput = document.getElementById("renameInput");
+
+  console.log("renameConversationButton =", renameConversationButton);
+
 
   let conversationId = localStorage.getItem("conversationId");
   let activeConversationId = conversationId;
@@ -35,10 +40,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!res.ok) {
       localStorage.removeItem("conversationId");
       conversationId = null;
+      activeConversationId = null;
+      clearUI();
+      refreshConversationList();
       return;
     }
 
     const data = await res.json();
+
+    // AUTHORITATIVE state update
+    conversationId = id;
+    activeConversationId = id;
+    localStorage.setItem("conversationId", id);
+
     messagesDiv.innerHTML = "";
 
     for (const msg of data.messages) {
@@ -51,11 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+
   async function sendMessage() {
     const content = input.value;
     if (!content) return;
 
-    if (!conversationId) {
+    if (!activeConversationId) {
       await startConversation();
     }
 
@@ -64,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     messagesDiv.appendChild(userDiv);
 
     const res = await fetch(
-      `http://localhost:3000/conversations/${conversationId}/messages`,
+      `http://localhost:3000/conversations/${activeConversationId}/messages`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -91,16 +106,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function renameConversation(id) {
-    const newTitle = window.prompt("Enter new conversation title:");
-    if (!newTitle) return;
+    renameInput.value = "";
+    renameDialog.showModal();
 
-    const res = await fetch(`http://localhost:3000/conversations/${id}/rename`, { 
+    const result = await new Promise((resolve) => {
+      renameDialog.addEventListener(
+        "close",
+        () => {
+          resolve(renameDialog.returnValue);
+        },
+        { once: true }
+      );
+    });
+
+    if (result !== "confirm") return;
+
+    const title = renameInput.value.trim();
+    if (!title) return;
+
+    const res = await fetch(`http://localhost:3000/conversations/${id}/rename`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ title: newTitle }),
-    });
-    
-    if (res.ok) {
+      body: JSON.stringify({ title }),
+      }
+  );
+
+  if (res.ok) {
       await refreshConversationList();
     }
   }
@@ -133,9 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
       row.appendChild(dateSpan);
 
       row.addEventListener("click", async () => {
-        activeConversationId = convo.id;
-        conversationId = convo.id;
-        localStorage.setItem("conversationId", conversationId);
         await loadConversation(convo.id);
         refreshConversationList();
       });
@@ -149,9 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  if (conversationId) {
-    loadConversation(conversationId);
-  }
+  (async () => {
+    if (conversationId) {
+      await loadConversation(conversationId);
+    }
+  })();
+
 
   sendButton.addEventListener("click", sendMessage);
   newConversationButton.addEventListener("click", startNewConversation);
