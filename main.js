@@ -7,7 +7,7 @@ function createWindow() {
   });
 
   win.loadFile("index.html");
-  win.webContents.openDevTools();
+  if (process.env.NODE_ENV === "development") {win.webContents.openDevTools();}
 }
 
 

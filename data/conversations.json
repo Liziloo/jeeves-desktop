@@ -40,7 +40,19 @@
       "id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
       "title": "New Conversation",
       "created_at": "2025-12-14T13:46:53.679Z",
-      "updated_at": "2025-12-14T13:47:19.792Z"
+      "updated_at": "2025-12-14T14:46:35.927Z"
+    },
+    {
+      "id": "9faf6888-879c-45fd-854c-887115067bfb",
+      "title": "New Conversation",
+      "created_at": "2025-12-14T14:47:20.908Z",
+      "updated_at": "2025-12-14T14:47:20.908Z"
+    },
+    {
+      "id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "title": "New Conversation",
+      "created_at": "2025-12-14T14:57:14.954Z",
+      "updated_at": "2025-12-14T15:19:48.887Z"
     }
   ],
   "messages": [
@@ -151,6 +163,186 @@
       "role": "assistant",
       "content": "I don’t know your name based on our current conversation. If you’d like to share it, feel free!",
       "timestamp": "2025-12-14T13:47:19.792Z"
+    },
+    {
+      "conversation_id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
+      "role": "user",
+      "content": "What is my name?",
+      "timestamp": "2025-12-14T14:46:35.094Z"
+    },
+    {
+      "conversation_id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
+      "role": "assistant",
+      "content": "You mentioned earlier that your name is Liz. How can I assist you today, Liz?",
+      "timestamp": "2025-12-14T14:46:35.927Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "I'm Jack",
+      "timestamp": "2025-12-14T14:57:24.740Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "Hello Jack! How can I assist you today?",
+      "timestamp": "2025-12-14T14:57:26.255Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "I like apples",
+      "timestamp": "2025-12-14T14:58:20.966Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "That's great, Jack! Apples are delicious and healthy. Do you have a favorite type of apple?",
+      "timestamp": "2025-12-14T14:58:22.504Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Honeycrisp.",
+      "timestamp": "2025-12-14T14:58:30.332Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "Honeycrisp apples are a fantastic choice! They’re sweet, juicy, and have a nice crisp texture. Do you like to eat them fresh, or do you use them in recipes like pies or salads?",
+      "timestamp": "2025-12-14T14:58:32.310Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Fresh. I'm too tired to bake.",
+      "timestamp": "2025-12-14T14:58:44.899Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "Eating Honeycrisp apples fresh is a perfect way to enjoy their natural flavor—no baking required! If you ever want easy, no-bake snack ideas with apples, just let me know. Hope you get some good rest soon!",
+      "timestamp": "2025-12-14T14:58:45.947Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Thank you. Do you know my brother, Johnny Appleseed?",
+      "timestamp": "2025-12-14T14:59:06.020Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "You're welcome, Jack! Johnny Appleseed is a famous American folk figure known for planting apple trees across the United States, but I don't know your brother personally. Is your brother named after him?",
+      "timestamp": "2025-12-14T14:59:06.874Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "My brother IS him",
+      "timestamp": "2025-12-14T14:59:18.003Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "Wow, that’s incredible, Jack! If your brother really is Johnny Appleseed, then you have a living legend in your family. Is there a story you’d like to share about him or his apple-planting adventures?",
+      "timestamp": "2025-12-14T14:59:19.450Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Once, he went with our cousin to find a blue ox. They named him Babe.",
+      "timestamp": "2025-12-14T15:00:00.428Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "That sounds like an amazing adventure, Jack! Finding a blue ox named Babe definitely brings to mind the legendary tales of Paul Bunyan and his giant blue ox. It’s fascinating that your family has connections to such iconic American folklore. Do you have any other stories or adventures about Johnny Appleseed or your family’s legendary history?",
+      "timestamp": "2025-12-14T15:00:02.664Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Babe is blue because one winter, they had to sleep in an igloo overnight during a snow storm",
+      "timestamp": "2025-12-14T15:00:43.539Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "That’s a fantastic story, Jack! Spending a night in an igloo during a snowstorm sounds like quite the adventure—and it’s a creative way to explain why Babe is blue! Your family’s tales really bring those legends to life. Do you have any other stories about Johnny Appleseed, Babe, or your cousin?",
+      "timestamp": "2025-12-14T15:00:45.094Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Babe likes to eat grass and hay",
+      "timestamp": "2025-12-14T15:01:05.581Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "That makes perfect sense, Jack! As a blue ox, Babe would naturally enjoy munching on grass and hay. It sounds like Babe is quite the gentle giant. Do you ever get to spend time with Babe or help take care of him?",
+      "timestamp": "2025-12-14T15:01:06.502Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "No. But I like to sing",
+      "timestamp": "2025-12-14T15:02:26.787Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "Singing is a wonderful way to express yourself, Jack! Do you have a favorite song or type of music you like to sing? Maybe you even sing to Babe or your family during your adventures!",
+      "timestamp": "2025-12-14T15:02:27.799Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "I like to sing along with Jeff Buckley's \"Hallelujah\"",
+      "timestamp": "2025-12-14T15:08:33.564Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "That’s a beautiful choice, Jack! Jeff Buckley’s rendition of “Hallelujah” is truly moving and showcases an incredible voice. Singing along to a song like that must be really special. Do you enjoy singing solo, or do you like to sing with others sometimes?",
+      "timestamp": "2025-12-14T15:08:34.588Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Mostly by myself. But I\"m in the church choir",
+      "timestamp": "2025-12-14T15:09:15.269Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "That’s wonderful, Jack! Singing in the church choir must be a great way to share your love of music with others and be part of a community. It’s nice that you also enjoy singing solo—it gives you a chance to connect with the music in your own way. Do you have a favorite song or piece you’ve performed with the choir?",
+      "timestamp": "2025-12-14T15:09:16.735Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Eddie James' \"Glory\"",
+      "timestamp": "2025-12-14T15:15:00.423Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "“Glory” by Eddie James is a powerful and uplifting song—what a great choice for the choir! It must feel amazing to sing something so inspiring with your church community. Do you have any upcoming performances or special events where you’ll be singing it?",
+      "timestamp": "2025-12-14T15:15:01.734Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "user",
+      "content": "Dec 21",
+      "timestamp": "2025-12-14T15:19:47.724Z"
+    },
+    {
+      "conversation_id": "7b017a85-8055-4fc7-8f24-dbcdf1e964d6",
+      "role": "assistant",
+      "content": "That sounds like a wonderful event to look forward to, Jack! Singing “Glory” on December 21st will surely be a meaningful way to celebrate the season. If you want, I can help you find tips for preparing your performance or even suggest some warm-up exercises. Would you like that?",
+      "timestamp": "2025-12-14T15:19:48.887Z"
     }
   ]
 }

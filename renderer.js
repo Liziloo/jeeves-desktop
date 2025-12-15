@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sendButton = document.getElementById("send");
   const newConversationButton = document.getElementById("newConversation");
   const conversationListDiv = document.getElementById("conversationList");
+  const renameConversationButton = document.getElementById("renameConversation");
 
   let conversationId = localStorage.getItem("conversationId");
   let activeConversationId = conversationId;
@@ -81,6 +82,29 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshConversationList();
   }
 
+  function formatConversationDate(convo) {
+    const iso = convo.updated_at || convo.created_at;
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleString();
+  }
+
+  async function renameConversation(id) {
+    const newTitle = window.prompt("Enter new conversation title:");
+    if (!newTitle) return;
+
+    const res = await fetch(`http://localhost:3000/conversations/${id}/rename`, { 
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: newTitle }),
+    });
+    
+    if (res.ok) {
+      await refreshConversationList();
+    }
+  }
+
   async function refreshConversationList() {
     const res = await fetch("http://localhost:3000/conversations");
     const conversations = await res.json();
@@ -97,7 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
         row.classList.add("active");
       }
 
-      row.textContent = convo.title;
+      const titleSpan = document.createElement("span");
+      titleSpan.className = "conversation-title";
+      titleSpan.textContent = convo.title;
+
+      const dateSpan = document.createElement("span");
+      dateSpan.className = "conversation-date";
+      dateSpan.textContent = formatConversationDate(convo);
+
+      row.appendChild(titleSpan);
+      row.appendChild(dateSpan);
 
       row.addEventListener("click", async () => {
         activeConversationId = convo.id;
@@ -105,6 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem("conversationId", conversationId);
         await loadConversation(convo.id);
         refreshConversationList();
+      });
+
+      row.addEventListener("dblclick", async (e) => {
+        e.preventDefault();
+        await renameConversation(convo.id);
       });
 
       conversationListDiv.appendChild(row);
@@ -117,6 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   sendButton.addEventListener("click", sendMessage);
   newConversationButton.addEventListener("click", startNewConversation);
+  renameConversationButton.addEventListener("click", async () => {
+    if (activeConversationId) {
+      await renameConversation(activeConversationId);
+    }
+  });
 
   refreshConversationList();
 });

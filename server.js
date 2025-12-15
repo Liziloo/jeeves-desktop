@@ -5,7 +5,6 @@ const crypto = require("crypto");
 const cors = require("cors");
 const OpenAI = require("openai");
 
-
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("OPENAI_API_KEY not set");
 }
@@ -13,16 +12,26 @@ if (!process.env.OPENAI_API_KEY) {
 const MODEL = "gpt-4.1-mini";
 const TEMPERATURE = 0.2;
 
+// Max context to send
+const CONTEXT_MAX_MESSAGES = 20;
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-async function getAIResponse(conversationId) {
+async function getAIResponse(conversationId, upToTimestamp) {
+
   const messages = store.messages
-    .filter((m) => m.conversation_id === conversationId)
+    .filter(
+      (m) =>
+        m.conversation_id === conversationId && m.timestamp <= upToTimestamp
+    )
+    .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
+    .slice(-CONTEXT_MAX_MESSAGES)
     .map((m) => ({
       role: m.role,
       content: m.content,
     }));
 
+  console.log(messages)
   const response = await openai.chat.completions.create({
     model: MODEL,
     temperature: TEMPERATURE,
@@ -37,7 +46,6 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(cors({ origin: "*" }));
-
 
 const DATA_DIR = path.join(__dirname, "data");
 const DATA_FILE = path.join(DATA_DIR, "conversations.json");
@@ -120,7 +128,7 @@ app.post("/conversations/:id/messages", async (req, res) => {
 
   // Phase 4: AI response ONLY when user sends message
   if (role === "user") {
-    const aiText = await getAIResponse(conversation.id);
+    const aiText = await getAIResponse(conversation.id, userMessage.timestamp);
 
     const assistantMessage = {
       conversation_id: conversation.id,
@@ -140,7 +148,6 @@ app.post("/conversations/:id/messages", async (req, res) => {
   res.json(userMessage);
 });
 
-
 app.get("/conversations/:id", (req, res) => {
   const conversation = store.conversations.find((c) => c.id === req.params.id);
 
@@ -157,7 +164,8 @@ app.get("/conversations/:id", (req, res) => {
 
 // Rename conversation
 app.patch("/conversations/:id/rename", (req, res) => {
-  const title = req.body?.title === "string" ? req.body.title.trim() : "";
+  const title =
+    typeof req.body?.title === "string" ? req.body.title.trim() : "";
 
   if (!title) {
     return res.status(400).json({ error: "Title is required" });
