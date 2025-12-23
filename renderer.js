@@ -7,8 +7,71 @@ document.addEventListener("DOMContentLoaded", () => {
   const renameConversationButton = document.getElementById("renameConversation");
   const renameDialog = document.getElementById("renameDialog");
   const renameInput = document.getElementById("renameInput");
+  const quickAskButton = document.getElementById("quickAsk");
+  const quickAskDialog = document.getElementById("quickAskDialog");
+  const quickAskInput = document.getElementById("quickAskInput");
+  const quickAskTaskType = document.getElementById("quickAskTaskType");
+  const quickAskTargetLanguageWrapper = document.getElementById(
+    "quickAskTargetLanguageWrapper"
+  );
+  const quickAskTargetLanguage = document.getElementById(
+    "quickAskTargetLanguage"
+  );
 
-  console.log("renameConversationButton =", renameConversationButton);
+  // Quick Ask Dialog Logic
+  let quickAskInFlight = false;
+
+  quickAskTaskType.addEventListener("change", () => {
+    if (quickAskTaskType.value === "translate") {
+      quickAskTargetLanguageWrapper.style.display = "block";
+    } else {
+      quickAskTargetLanguageWrapper.style.display = "none";
+    }
+  });
+
+  quickAskButton.addEventListener("click", () => {
+    quickAskInput.value = "";
+    quickAskTaskType.value = "general";
+    quickAskDialog.showModal();
+  });
+
+
+  quickAskDialog.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (quickAskInFlight) return;
+
+    const content = quickAskInput.value.trim();
+    if (!content) return;
+
+    quickAskInFlight = true;
+
+    const submitButton = e.target.querySelector('button[value="confirm"]');
+    submitButton.disabled = true;
+    submitButton.textContent = "Thinking…";
+
+    const taskType = quickAskTaskType.value;
+
+    try {
+      const res = await fetch("http://localhost:3000/quick-ask", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          content,
+          taskType,
+        }),
+      });
+
+      const data = await res.json();
+      alert(data.content);
+      quickAskDialog.close();
+    } finally {
+      quickAskInFlight = false;
+      submitButton.disabled = false;
+      submitButton.textContent = "Ask";
+    }
+  });
+
+
 
 
   let conversationId = localStorage.getItem("conversationId");

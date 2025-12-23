@@ -1,9 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const cors = require("cors");
 const OpenAI = require("openai");
+const systemPrompt = require("./systemPrompt");
 
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("OPENAI_API_KEY not set");
@@ -17,26 +19,60 @@ const CONTEXT_MAX_MESSAGES = 20;
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-async function getAIResponse(conversationId, upToTimestamp) {
+function buildSystemPrompt(prompt_profile) {
+  if (!prompt_profile) {
+    throw new Error("prompt_profile is required");
+  }
 
-  const messages = store.messages
-    .filter(
-      (m) =>
-        m.conversation_id === conversationId && m.timestamp <= upToTimestamp
-    )
-    .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
-    .slice(-CONTEXT_MAX_MESSAGES)
-    .map((m) => ({
-      role: m.role,
-      content: m.content,
-    }));
+  return systemPrompt;
+}
 
-  console.log(messages)
-  const response = await openai.chat.completions.create({
+async function getAIResponse(
+  conversationId,
+  upToTimestamp,
+  options,
+  directMessages = null
+) {
+  const { prompt_profile, active_mode, task_type, available_tools } =
+    options || {};
+
+  if (!prompt_profile) {
+    throw new Error("prompt_profile is required");
+  }
+
+  const historyMessages = directMessages
+    ? directMessages
+    : store.messages
+        .filter(
+          (m) =>
+            m.conversation_id === conversationId && m.timestamp <= upToTimestamp
+        )
+        .sort((a, b) => a.timestamp.localeCompare(b.timestamp))
+        .slice(-CONTEXT_MAX_MESSAGES)
+        .map((m) => ({
+          role: m.role,
+          content: m.content,
+        }));
+
+  const messages = [
+    {
+      role: "system",
+      content: buildSystemPrompt(prompt_profile),
+    },
+    ...historyMessages,
+  ];
+
+  const payload = {
     model: MODEL,
     temperature: TEMPERATURE,
     messages,
-  });
+  };
+
+  if (active_mode) payload.active_mode = active_mode;
+  if (task_type) payload.task_type = task_type;
+  if (available_tools) payload.available_tools = available_tools;
+
+  const response = await openai.chat.completions.create(payload);
 
   return response.choices[0].message.content;
 }
@@ -45,6 +81,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+
 app.use(cors({ origin: "*" }));
 
 const DATA_DIR = path.join(__dirname, "data");
@@ -87,6 +124,64 @@ app.get("/conversations", (req, res) => {
   res.json(conversations);
 });
 
+app.post("/quick-ask", async (req, res) => {
+  const { content, taskType, targetLanguage } = req.body;
+
+  if (typeof content !== "string" || !content.trim()) {
+    return res.status(400).json({ error: "invalid content" });
+  }
+
+  const TASKTYPE_TO_MODE = {
+    general: "Mode 1 — Neutral Analytical",
+    search: "Mode 7 — Practical Solutions",
+    summarize: "Mode 1 — Neutral Analytical",
+    translate: "Mode 4 — Constraint-Execution",
+    explain_code: "Mode 3 — Code-First Analytical",
+    rewrite: "Mode 4 — Constraint-Execution",
+    check_logic: "Mode 1 — Neutral Analytical",
+  };
+
+  const activeMode = TASKTYPE_TO_MODE[taskType];
+  if (!activeMode) {
+    return res.status(400).json({ error: "unsupported taskType" });
+  }
+
+  if (taskType === "translate" && !targetLanguage) {
+    return res.status(400).json({ error: "targetLanguage required" });
+  }
+
+  const instruction =
+    taskType === "general"
+      ? "instruction: Answer the user's question directly.\n"
+      : "";
+
+  const systemContextMessage = {
+    role: "system",
+    content:
+      `SYSTEM CONTEXT\n` +
+      `prompt_profile: quick_ask\n` +
+      `task_type: ${taskType}\n` +
+      `active_mode: ${activeMode}\n` +
+      instruction +
+      (taskType === "translate" ? `target_language: ${targetLanguage}\n` : "") +
+      `available_tools: []\n`,
+  };
+
+  let aiText;
+  try {
+    aiText = await getAIResponse(null, null, { prompt_profile: "quick_ask" }, [
+      systemContextMessage,
+      { role: "user", content },
+    ]);
+  } catch (err) {
+    console.error("AI error:", err);
+    return res.status(500).json({ error: "AI request failed" });
+  }
+
+  return res.json({ content: aiText });
+});
+
+
 app.post("/conversations", async (req, res) => {
   const now = new Date().toISOString();
   const conversation = {
@@ -128,7 +223,17 @@ app.post("/conversations/:id/messages", async (req, res) => {
 
   // Phase 4: AI response ONLY when user sends message
   if (role === "user") {
-    const aiText = await getAIResponse(conversation.id, userMessage.timestamp);
+
+    let aiText;
+    try {
+      aiText = await getAIResponse(conversation.id, userMessage.timestamp, {
+        prompt_profile: "conversation",
+      });
+    } catch (err) {
+      console.error("AI error:", err);
+      return res.status(500).json({ error: "AI request failed" });
+    }
+
 
     const assistantMessage = {
       conversation_id: conversation.id,

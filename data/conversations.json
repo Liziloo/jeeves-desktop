@@ -40,7 +40,7 @@
       "id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
       "title": "First Try Rename",
       "created_at": "2025-12-14T13:46:53.679Z",
-      "updated_at": "2025-12-15T20:31:42.500Z"
+      "updated_at": "2025-12-17T15:00:58.950Z"
     },
     {
       "id": "9faf6888-879c-45fd-854c-887115067bfb",
@@ -53,6 +53,18 @@
       "title": "Second Try Rename",
       "created_at": "2025-12-14T14:57:14.954Z",
       "updated_at": "2025-12-15T20:30:36.749Z"
+    },
+    {
+      "id": "eb0e2dc4-7c4f-44cd-b258-fa991fe922eb",
+      "title": "New Conversation",
+      "created_at": "2025-12-17T15:06:36.875Z",
+      "updated_at": "2025-12-17T15:13:07.529Z"
+    },
+    {
+      "id": "a1717861-7aa0-47bb-9e68-74e1aa48b545",
+      "title": "New Conversation",
+      "created_at": "2025-12-17T15:14:47.185Z",
+      "updated_at": "2025-12-17T15:14:55.153Z"
     }
   ],
   "messages": [
@@ -355,6 +367,60 @@
       "role": "assistant",
       "content": "Sounds like you might need a good boost! Are you looking for coffee recommendations, tips on making great coffee, or something else related to coffee?",
       "timestamp": "2025-12-15T20:31:42.500Z"
+    },
+    {
+      "conversation_id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
+      "role": "user",
+      "content": "GOod morning",
+      "timestamp": "2025-12-17T14:45:45.388Z"
+    },
+    {
+      "conversation_id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
+      "role": "user",
+      "content": "How are you?",
+      "timestamp": "2025-12-17T14:53:24.223Z"
+    },
+    {
+      "conversation_id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
+      "role": "user",
+      "content": "Are you there?",
+      "timestamp": "2025-12-17T14:57:57.775Z"
+    },
+    {
+      "conversation_id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
+      "role": "user",
+      "content": "Are you there?",
+      "timestamp": "2025-12-17T15:00:22.529Z"
+    },
+    {
+      "conversation_id": "f2cdf98e-e8ed-4c14-b378-45b9109c692f",
+      "role": "user",
+      "content": "It's almost christmas",
+      "timestamp": "2025-12-17T15:00:58.950Z"
+    },
+    {
+      "conversation_id": "eb0e2dc4-7c4f-44cd-b258-fa991fe922eb",
+      "role": "user",
+      "content": "It's almost christmas",
+      "timestamp": "2025-12-17T15:06:42.191Z"
+    },
+    {
+      "conversation_id": "eb0e2dc4-7c4f-44cd-b258-fa991fe922eb",
+      "role": "user",
+      "content": "It's almost christmas",
+      "timestamp": "2025-12-17T15:13:05.992Z"
+    },
+    {
+      "conversation_id": "eb0e2dc4-7c4f-44cd-b258-fa991fe922eb",
+      "role": "assistant",
+      "content": "Yes, the holiday season is approaching. Is there something specific you would like to discuss or plan related to Christmas?",
+      "timestamp": "2025-12-17T15:13:07.529Z"
+    },
+    {
+      "conversation_id": "a1717861-7aa0-47bb-9e68-74e1aa48b545",
+      "role": "user",
+      "content": "Good nocturne",
+      "timestamp": "2025-12-17T15:14:55.153Z"
     }
   ]
 }

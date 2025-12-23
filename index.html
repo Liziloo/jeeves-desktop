@@ -22,6 +22,7 @@
       <main id="main">
         <div id="controls">
           <button id="newConversation">New Conversation</button>
+          <button id="quickAsk">Quick Ask</button>
           <button id="renameConversation">Rename</button>
         </div>
 
@@ -43,6 +44,37 @@
         </menu>
       </form>
     </dialog>
+    <dialog id="quickAskDialog">
+      <form id="quickAsk" novalidate>
+        <label>
+          Task type:
+          <select id="quickAskTaskType">
+            <option value="general">General question</option>
+            <option value="search">Search / lookup</option>
+            <option value="summarize">Summarize pasted text</option>
+            <option value="translate">Translate text</option>
+            <option value="explain_code">Explain code</option>
+            <option value="rewrite">Rewrite text</option>
+            <option value="check_logic">Check logic</option>
+          </select>
+        </label>
+        <label id="quickAskTargetLanguageWrapper" style="display: none;">
+          Target language:
+          <select id="quickAskTargetLanguage">
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+          </select>
+        </label>
+        <textarea id="quickAskInput" autofocus></textarea>
+        <menu>
+          <button value="cancel">Cancel</button>
+          <button value="confirm">Ask</button>
+        </menu>
+      </form>
+    </dialog>
+
     <script src="renderer.js"></script>
   </body>
 </html>
