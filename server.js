@@ -17,6 +17,98 @@ const TEMPERATURE = 0.2;
 // Max context to send
 const CONTEXT_MAX_MESSAGES = 20;
 
+// ================================
+// AI AVAILABILITY RUNTIME STATE
+// ================================
+// This state governs WHETHER AI CALLS ARE ALLOWED.
+// It does NOT represent application state, server health,
+// or feature availability unrelated to AI usage.
+//
+// ENABLED  : AI calls are permitted (subject to governance).
+// PAUSED   : AI calls are temporarily blocked but expected to resume.
+// DISABLED : AI calls are fully disabled; app must operate without AI.
+
+const AI_RUNTIME_STATE = Object.freeze({
+  ENABLED: "enabled",
+  PAUSED: "paused",
+  DISABLED: "disabled",
+});
+
+// Authoritative current AI availability state.
+// This variable is the single source of truth for AI availability.
+let currentAIState = AI_RUNTIME_STATE.PAUSED;
+
+// ==========================================
+// AI GOVERNANCE — ABSTRACT USAGE CEILINGS
+// ==========================================
+// Policy-level ceilings. These are NOT billing logic.
+// They operate on a normalized usage snapshot.
+
+const AI_USAGE_CEILINGS = Object.freeze({
+  MAX_CALLS: Infinity,
+  MAX_CALLS_PER_CONVERSATION: Infinity,
+  COST_CEILING: Infinity, // reserved for future provider data
+});
+
+// ==========================================
+// AI GOVERNANCE — USAGE SNAPSHOT INTERFACE
+// ==========================================
+// Represents AI usage signals regardless of source.
+// Future implementations MAY populate provider fields
+// (e.g., via OpenAI usage APIs) without changing callers.
+
+function getAIUsageSnapshot({ conversationId = null }) {
+  return {
+    // Internal counters (to be implemented later)
+    totalCalls: 0,
+    conversationCalls: 0,
+
+    // External provider signals (optional, deferred)
+    provider: {
+      tokensUsed: null,
+      dollarsUsed: null,
+      billingPeriod: null,
+    },
+  };
+}
+
+// ==========================================
+// AI GOVERNANCE — ALLOWANCE DECISION POINT
+// (ceiling-aware, non-enforcing)
+// ==========================================
+
+function evaluateAIAllowance({ requestPath, conversationId = null }) {
+  if (currentAIState !== AI_RUNTIME_STATE.ENABLED) {
+    return {
+      allowed: false,
+      state: currentAIState,
+      reason: "AI runtime state blocks usage",
+    };
+  }
+
+  const usage = getAIUsageSnapshot({ conversationId });
+
+  const ceilingBlocked =
+    usage.totalCalls >= AI_USAGE_CEILINGS.MAX_CALLS ||
+    usage.conversationCalls >=
+      AI_USAGE_CEILINGS.MAX_CALLS_PER_CONVERSATION;
+
+  if (ceilingBlocked) {
+    return {
+      allowed: false,
+      state: currentAIState,
+      reason: "AI usage ceiling blocks usage",
+    };
+  }
+
+  return {
+    allowed: true,
+    state: currentAIState,
+    reason: null,
+  };
+}
+
+
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 function buildSystemPrompt(prompt_profile) {
@@ -77,6 +169,77 @@ async function getAIResponse(
   return response.choices[0].message.content;
 }
 
+// ==========================================
+// AI GOVERNANCE — SINGLE AI ENTRY POINT
+// ==========================================
+// All AI calls MUST go through this function.
+// Direct calls to getAIResponse() are forbidden
+// outside this wrapper.
+
+async function requestAIResponse({
+  requestPath,
+  conversationId = null,
+  upToTimestamp = null,
+  options,
+  directMessages = null,
+}) {
+  const aiDecision = evaluateAIAllowance({ requestPath, conversationId });
+
+  // ==========================================
+  // GLOBAL AI TELEMETRY (PERSISTED)
+  // ==========================================
+
+  store.ai_telemetry.total_ai_calls += 1;
+  store.ai_telemetry.last_event_at = new Date().toISOString();
+  store.ai_telemetry.last_ai_state = aiDecision.state;
+
+  if (!aiDecision.allowed) {
+    store.ai_telemetry.blocked_ai_calls += 1;
+    store.ai_telemetry.last_ai_block_reason = aiDecision.reason;
+  }
+
+  saveStore();
+
+  logAIGovernanceEvent({
+    type: "ENFORCEMENT_DECISION",
+    requestPath,
+    conversationId,
+    allowed: aiDecision.allowed,
+    state: aiDecision.state,
+    reason: aiDecision.reason,
+  });
+
+  if (!aiDecision.allowed) {
+    return (
+      `[SYSTEM MESSAGE]\n` +
+      `AI unavailable.\n` +
+      `state: ${aiDecision.state}\n` +
+      `reason: ${aiDecision.reason}`
+    );
+  }
+
+  return getAIResponse(conversationId, upToTimestamp, options, directMessages);
+}
+
+function logAIGovernanceEvent(event) {
+  console.log(
+    `[AI_GOVERNANCE] ${new Date().toISOString()} ` + JSON.stringify(event)
+  );
+}
+
+function setAIState(nextState, reason = null) {
+  if (currentAIState === nextState) return;
+
+  logAIGovernanceEvent({
+    type: "STATE_TRANSITION",
+    from: currentAIState,
+    to: nextState,
+    reason,
+  });
+
+  currentAIState = nextState;
+}
+
 const app = express();
 const PORT = 3000;
 
@@ -90,7 +253,15 @@ const DATA_FILE = path.join(DATA_DIR, "conversations.json");
 let store = {
   conversations: [],
   messages: [],
+  ai_telemetry: {
+    total_ai_calls: 0,
+    blocked_ai_calls: 0,
+    last_event_at: null,
+    last_ai_state: null,
+    last_ai_block_reason: null,
+  },
 };
+
 
 function loadStore() {
   if (!fs.existsSync(DATA_FILE)) {
@@ -101,6 +272,16 @@ function loadStore() {
 
   const raw = fs.readFileSync(DATA_FILE, "utf-8");
   store = JSON.parse(raw);
+  if (!store.ai_telemetry) {
+    store.ai_telemetry = {
+      total_ai_calls: 0,
+      blocked_ai_calls: 0,
+      last_event_at: null,
+      last_ai_state: null,
+      last_ai_block_reason: null,
+    };
+  }
+
 }
 
 function saveStore() {
@@ -169,10 +350,12 @@ app.post("/quick-ask", async (req, res) => {
 
   let aiText;
   try {
-    aiText = await getAIResponse(null, null, { prompt_profile: "quick_ask" }, [
-      systemContextMessage,
-      { role: "user", content },
-    ]);
+    aiText = await requestAIResponse({
+      requestPath: "quick-ask",
+      options: { prompt_profile: "quick_ask" },
+      directMessages: [systemContextMessage, { role: "user", content }],
+    });
+
   } catch (err) {
     console.error("AI error:", err);
     return res.status(500).json({ error: "AI request failed" });
@@ -189,6 +372,12 @@ app.post("/conversations", async (req, res) => {
     title: "New Conversation",
     created_at: now,
     updated_at: now,
+    ai_telemetry: {
+      total_ai_calls: 0,
+      blocked_ai_calls: 0,
+      last_ai_state: null,
+      last_ai_block_reason: null,
+    },
   };
 
   store.conversations.push(conversation);
@@ -226,8 +415,11 @@ app.post("/conversations/:id/messages", async (req, res) => {
 
     let aiText;
     try {
-      aiText = await getAIResponse(conversation.id, userMessage.timestamp, {
-        prompt_profile: "conversation",
+      aiText = await requestAIResponse({
+        requestPath: "conversation",
+        conversationId: conversation.id,
+        upToTimestamp: userMessage.timestamp,
+        options: { prompt_profile: "conversation" },
       });
     } catch (err) {
       console.error("AI error:", err);

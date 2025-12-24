@@ -64,7 +64,43 @@
       "id": "a1717861-7aa0-47bb-9e68-74e1aa48b545",
       "title": "New Conversation",
       "created_at": "2025-12-17T15:14:47.185Z",
-      "updated_at": "2025-12-17T15:14:55.153Z"
+      "updated_at": "2025-12-24T16:09:03.495Z"
+    },
+    {
+      "id": "5d5bc813-3bcc-4a66-be73-ca12aa173717",
+      "title": "New Conversation",
+      "created_at": "2025-12-24T16:22:18.552Z",
+      "updated_at": "2025-12-24T16:22:32.199Z",
+      "ai_telemetry": {
+        "total_ai_calls": 0,
+        "blocked_ai_calls": 0,
+        "last_ai_state": null,
+        "last_ai_block_reason": null
+      }
+    },
+    {
+      "id": "cc789a8a-edd1-44e0-b488-f98b98bdb71a",
+      "title": "New Conversation",
+      "created_at": "2025-12-24T16:23:30.493Z",
+      "updated_at": "2025-12-24T16:25:17.372Z",
+      "ai_telemetry": {
+        "total_ai_calls": 0,
+        "blocked_ai_calls": 0,
+        "last_ai_state": null,
+        "last_ai_block_reason": null
+      }
+    },
+    {
+      "id": "41ef13e2-b290-4406-9ad6-e0a6f6b180b8",
+      "title": "New Conversation",
+      "created_at": "2025-12-24T16:44:27.939Z",
+      "updated_at": "2025-12-24T16:44:34.494Z",
+      "ai_telemetry": {
+        "total_ai_calls": 0,
+        "blocked_ai_calls": 0,
+        "last_ai_state": null,
+        "last_ai_block_reason": null
+      }
     }
   ],
   "messages": [
@@ -421,6 +457,76 @@
       "role": "user",
       "content": "Good nocturne",
       "timestamp": "2025-12-17T15:14:55.153Z"
+    },
+    {
+      "conversation_id": "a1717861-7aa0-47bb-9e68-74e1aa48b545",
+      "role": "user",
+      "content": "aRE YOU there?",
+      "timestamp": "2025-12-24T15:56:46.974Z"
+    },
+    {
+      "conversation_id": "a1717861-7aa0-47bb-9e68-74e1aa48b545",
+      "role": "assistant",
+      "content": {
+        "role": "system",
+        "content": "[AI BLOCKED]\nstate: paused\nreason: AI runtime state blocks usage"
+      },
+      "timestamp": "2025-12-24T15:56:46.975Z"
+    },
+    {
+      "conversation_id": "a1717861-7aa0-47bb-9e68-74e1aa48b545",
+      "role": "user",
+      "content": "Hello?",
+      "timestamp": "2025-12-24T16:09:03.494Z"
+    },
+    {
+      "conversation_id": "a1717861-7aa0-47bb-9e68-74e1aa48b545",
+      "role": "assistant",
+      "content": "[SYSTEM MESSAGE]\nAI unavailable.\nstate: paused\nreason: AI runtime state blocks usage",
+      "timestamp": "2025-12-24T16:09:03.495Z"
+    },
+    {
+      "conversation_id": "5d5bc813-3bcc-4a66-be73-ca12aa173717",
+      "role": "user",
+      "content": "Howdy",
+      "timestamp": "2025-12-24T16:22:32.199Z"
+    },
+    {
+      "conversation_id": "5d5bc813-3bcc-4a66-be73-ca12aa173717",
+      "role": "assistant",
+      "content": "[SYSTEM MESSAGE]\nAI unavailable.\nstate: paused\nreason: AI runtime state blocks usage",
+      "timestamp": "2025-12-24T16:22:32.199Z"
+    },
+    {
+      "conversation_id": "cc789a8a-edd1-44e0-b488-f98b98bdb71a",
+      "role": "user",
+      "content": "Are you there?",
+      "timestamp": "2025-12-24T16:25:15.538Z"
+    },
+    {
+      "conversation_id": "cc789a8a-edd1-44e0-b488-f98b98bdb71a",
+      "role": "assistant",
+      "content": "Yes, I am here. How can I assist you?",
+      "timestamp": "2025-12-24T16:25:17.372Z"
+    },
+    {
+      "conversation_id": "41ef13e2-b290-4406-9ad6-e0a6f6b180b8",
+      "role": "user",
+      "content": "Are suns blue?",
+      "timestamp": "2025-12-24T16:44:34.480Z"
+    },
+    {
+      "conversation_id": "41ef13e2-b290-4406-9ad6-e0a6f6b180b8",
+      "role": "assistant",
+      "content": "[SYSTEM MESSAGE]\nAI unavailable.\nstate: paused\nreason: AI runtime state blocks usage",
+      "timestamp": "2025-12-24T16:44:34.494Z"
     }
-  ]
+  ],
+  "ai_telemetry": {
+    "total_ai_calls": 3,
+    "blocked_ai_calls": 2,
+    "last_event_at": "2025-12-24T16:44:34.480Z",
+    "last_ai_state": "paused",
+    "last_ai_block_reason": "AI runtime state blocks usage"
+  }
 }
