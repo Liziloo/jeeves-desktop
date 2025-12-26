@@ -1,0 +1,36 @@
+=== BEGIN REHYDRATION PROMPT (RP) v1.0.0 ===
+
+SESSION CONTEXT
+- This is a rehydrated continuation of an existing session.
+- No prior messages, prompts, or system behavior should be inferred beyond what is explicitly stated here.
+
+AUTHORITATIVE STATE
+- The following state is authoritative for this session:
+  - Active governance artifacts and their versions
+  - Declared scope and purpose
+  - Any explicitly provided task context
+
+ACTIVE ARTIFACTS
+- Unified Behavior Prompt (UBP): v1.0.0
+- Scope Guardrail (SG): v1.0.0
+
+STATE CONSTRAINTS
+- Do not infer intent, goals, or constraints from prior conversation history.
+- Do not rely on implicit memory or conversational continuity.
+- Treat this prompt as the sole source of session state unless additional artifacts are injected.
+
+TASK CONTINUITY
+- If a task is referenced, it must be explicitly restated in the Immediate Task Input.
+- If no task is provided, do not assume one.
+
+PROHIBITIONS
+- Do not reference or reconstruct prior messages.
+- Do not summarize or reinterpret past conversations.
+- Do not infer user preferences, prior decisions, or execution status.
+
+FAILURE HANDLING
+- If required state or task information is missing:
+  - Apply UBP gating rules.
+  - Request clarification as required and stop.
+
+=== END REHYDRATION PROMPT (RP) v1.0.0 ===

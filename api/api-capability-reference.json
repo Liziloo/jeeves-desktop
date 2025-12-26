@@ -1,0 +1,136 @@
+{
+  "artifact_type": "api_capability_reference",
+  "version": "2025-01-verified",
+  "source": "official_openai_api_documentation",
+  "api_properties": {
+    "stateless": true,
+    "semantic_memory_across_calls": false,
+    "implicit_state": false,
+    "context_must_be_supplied_each_call": true,
+    "prompt_caching": {
+      "exists": true,
+      "provides_semantic_continuity": false,
+      "purpose": "cost_and_latency_optimization_only"
+    }
+  },
+  "endpoints": {
+    "responses_api": {
+      "documented": true,
+      "supports": [
+        "text_generation",
+        "image_input",
+        "tool_calling",
+        "structured_outputs"
+      ],
+      "notes": "Primary modern API surface for multi-modal and structured outputs."
+    },
+    "chat_completions_api": {
+      "documented": true,
+      "supports": [
+        "text_generation",
+        "tool_calling"
+      ],
+      "notes": "Legacy-compatible interface; fewer guarantees than Responses API."
+    }
+  },
+  "models": {
+    "gpt-4.1-nano": {
+      "family": "gpt-4.1",
+      "modalities": {
+        "input": ["text", "image"],
+        "output": ["text"]
+      },
+      "context_window_tokens": 1048576,
+      "max_output_tokens": 32768,
+      "tool_calling": true,
+      "structured_outputs": true,
+      "generation_controls": [
+        "temperature",
+        "top_p",
+        "top_logprobs",
+        "frequency_penalty",
+        "presence_penalty"
+      ],
+      "reasoning_request_field": {
+        "supported": false,
+        "note": "Reasoning controls documented for gpt-5 / o-series only."
+      },
+      "audio_video_support": false,
+      "deprecation_status": "not_deprecated",
+      "pricing_notes": "See official pricing page at request time; pricing subject to change."
+    },
+    "gpt-4.1-mini": {
+      "family": "gpt-4.1",
+      "modalities": {
+        "input": ["text", "image"],
+        "output": ["text"]
+      },
+      "context_window_tokens": 1048576,
+      "max_output_tokens": 32768,
+      "tool_calling": true,
+      "structured_outputs": true,
+      "generation_controls": [
+        "temperature",
+        "top_p",
+        "top_logprobs",
+        "frequency_penalty",
+        "presence_penalty"
+      ],
+      "reasoning_request_field": {
+        "supported": false,
+        "note": "Not documented for this model family."
+      },
+      "audio_video_support": false,
+      "deprecation_status": "not_deprecated",
+      "pricing_notes": "See official pricing page at request time; pricing subject to change."
+    },
+    "gpt-4o-mini": {
+      "family": "gpt-4o",
+      "modalities": {
+        "input": ["text", "image"],
+        "output": ["text"]
+      },
+      "context_window_tokens": 128000,
+      "max_output_tokens": 16384,
+      "tool_calling": true,
+      "structured_outputs": true,
+      "generation_controls": [
+        "temperature",
+        "top_p",
+        "top_logprobs",
+        "frequency_penalty",
+        "presence_penalty"
+      ],
+      "reasoning_request_field": {
+        "supported": false,
+        "note": "Not documented for this model."
+      },
+      "audio_video_support": false,
+      "deprecation_status": "not_deprecated",
+      "pricing_notes": "See official pricing page at request time; pricing subject to change."
+    }
+  },
+  "guarantees": {
+    "no_hidden_memory": true,
+    "no_cross_call_state": true,
+    "no_implicit_tool_access": true,
+    "schema_enforcement_when_structured_outputs_used": true
+  },
+  "explicit_non_guarantees": {
+    "long_term_memory": false,
+    "reasoning_controls_for_4_1_family": false,
+    "audio_video_io": false,
+    "behavioral_determinism_without_artifact_control": false
+  },
+  "intended_use": [
+    "design_time_constraint_validation",
+    "prompt_compilation_guardrail",
+    "rehydration_reference",
+    "backend_routing_decisions"
+  ],
+  "not_intended_for": [
+    "runtime_prompt_injection",
+    "model_behavior_instruction",
+    "policy_or_governance_text"
+  ]
+}

@@ -1,0 +1,37 @@
+=== BEGIN IMMEDIATE TASK INPUT (ITI) v1.0.0 ===
+
+TASK DECLARATION
+- Exactly one task may be declared.
+- If no task is declared, no task is assumed.
+
+TASK CONTENT RULES
+- The task must be explicit, concrete, and bounded.
+- The task must be fully expressible without reference to prior messages.
+- The task must not rely on implicit context or state.
+
+SCOPE COMPLIANCE
+- The task must fall entirely within the active Scope Guardrail.
+- If the task violates scope, refuse per Scope Guardrail handling and stop.
+
+GOVERNANCE ISOLATION
+- Do not include governance text, constraints, or artifact definitions.
+- Do not include rehydration or state declarations.
+- Do not include mode definitions or behavioral instructions.
+
+EXECUTION DISCIPLINE
+- Treat this artifact as the sole source of task intent.
+- Do not infer additional objectives, subtasks, or follow-on work.
+- Do not expand or reinterpret the task beyond its explicit wording.
+
+FAILURE HANDLING
+- If the task is ambiguous or underspecified:
+  - Apply UBP Ambiguity Gate and stop.
+- If required inputs are missing:
+  - Apply UBP Uncertainty Gate and stop.
+
+LIFETIME
+- This artifact is ephemeral.
+- It must not be persisted.
+- It must not be referenced after task completion.
+
+=== END IMMEDIATE TASK INPUT (ITI) v1.0.0 ===
