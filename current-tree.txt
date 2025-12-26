@@ -44,6 +44,8 @@
 │   │   ├── 0a/
 │   │   │   ├── 6cc8b2ce5e3e4aabe7cc9a4805c24db60df8e8
 │   │   │   └── a68783a447a60a8152ba76bf0545106c30aa9d
+│   │   ├── 10/
+│   │   │   └── 89bc5cc4bc7a0d6e592d8b3c507dd74a0bb1e0
 │   │   ├── 11/
 │   │   │   └── e272a6469e9485aaa089b91d3a4d5d01da4f47
 │   │   ├── 20/
@@ -53,13 +55,24 @@
 │   │   │   └── 5050432d215dce6010ae655864cee7ba41809a
 │   │   ├── 25/
 │   │   │   └── 1370b6a31b63d05ba414917adc00690aa082d2
+│   │   ├── 26/
+│   │   │   └── 3cdbf4e6cd4b212021dfcb16e7c727243ae084
+│   │   ├── 2a/
+│   │   │   └── e8adc9ea0cc6cc3c1f7d9e81dd8eca1e9cad42
 │   │   ├── 2e/
 │   │   │   └── 7fb1dafcee4141f0242779ee3edb791e0ab301
+│   │   ├── 35/
+│   │   │   ├── 176ed0eb6d5f1722367a9f1c8d1a0e6f04c7c9
+│   │   │   └── f58fac5fce4d7e1fc5be2c35bcff9ed19e0e7c
+│   │   ├── 38/
+│   │   │   └── 036be5c8041c0839883a40bb59481c4cd6edb6
 │   │   ├── 3e/
 │   │   │   └── 89fd56c643fa6cbdcd3047f1a7ea05ffdbb92c
 │   │   ├── 40/
 │   │   │   ├── b8bea7d603187a0be0a18ae1560e9476215cfa
 │   │   │   └── d966e3c327e9622a3a4511b73854294afec1f4
+│   │   ├── 44/
+│   │   │   └── 8f973c25cd9664b5d6ce46af9d055d0a87b686
 │   │   ├── 46/
 │   │   │   └── 37f5b719ff186337fd6a3a5fa9f32c5e9082dd
 │   │   ├── 4a/
@@ -74,23 +87,43 @@
 │   │   ├── 5b/
 │   │   │   └── 81b886b459532f6b0d594f0d79f5fca87acc95
 │   │   ├── 5c/
-│   │   │   └── 44def249f563e0532ec46bd855698a6145aa31
+│   │   │   ├── 44def249f563e0532ec46bd855698a6145aa31
+│   │   │   └── bc61a873d8729b63980d42dcba8f615199b049
+│   │   ├── 5d/
+│   │   │   └── 515b83164f57064d745a188eb0211f3380987c
+│   │   ├── 5e/
+│   │   │   └── c2c0cc518cc0fbba713adb8fc611d475ac53ce
 │   │   ├── 6a/
 │   │   │   └── 4730059fb76fe922b34e504d9df64302042174
 │   │   ├── 6b/
 │   │   │   └── 4091b308921dc50c6e8716746ae6066841b1e6
+│   │   ├── 6f/
+│   │   │   └── d29721ca73255318252f63783ac49d8df9ff79
+│   │   ├── 70/
+│   │   │   └── 275990d8195b58edc8293ac23395efcb76c68e
 │   │   ├── 71/
+│   │   │   ├── 4a6f17cbea2b41ff8d5f8da4f327b7b3c2bd00
 │   │   │   ├── 4a72f0b756dd45e773deafc67e7874b17bbd94
+│   │   │   ├── 60c5dff2b026aca39fc3baf990f75ac7341348
 │   │   │   └── 6b2817822e2d03677c3d7188d62030d2a56c2a
 │   │   ├── 72/
 │   │   │   └── 029ba8f0d61cb53468bfea4f7724889813e32d
 │   │   ├── 75/
 │   │   │   └── 88565b3828fb2f130a529539aa8f25a0ff6645
+│   │   ├── 78/
+│   │   │   ├── 12248db9ece41aab358f3e00d84d293365455c
+│   │   │   └── c854c8701f325da7de2c451ca93f84d923eca4
+│   │   ├── 81/
+│   │   │   └── 6ab992b93696581bba74752b854071e871a05e
 │   │   ├── 82/
 │   │   │   └── 2c0eda195680ab2519ad8452f1b39418264e84
+│   │   ├── 85/
+│   │   │   └── b52b328352d990f165f51dab90d99a569514a6
 │   │   ├── 88/
 │   │   │   ├── 497d28dfd5b2467ffcde05304a30c38587ddec
 │   │   │   └── 6c3f80ab22bcaa7200c3fbc259dc325ca6c9a9
+│   │   ├── 8d/
+│   │   │   └── f3b046f0d635c398b5b92ef6e98c581250a252
 │   │   ├── 94/
 │   │   │   └── 910a8862e59a0b3d2e70a10c9f7cefb786fce7
 │   │   ├── 98/
@@ -105,30 +138,49 @@
 │   │   │   └── 7a308d7559208efe1923364eaebbdba6b8a572
 │   │   ├── a2/
 │   │   │   └── fe12e261cd571f563f9a966923ae79ae99eafd
+│   │   ├── a6/
+│   │   │   └── d6bfe7452a5c77129cd31c8078ffeb515ccc3c
 │   │   ├── a8/
 │   │   │   └── 98a3a98d02ec176f3dbbdc4fc451b66b9acf09
+│   │   ├── aa/
+│   │   │   └── 75b6521d032a8f9d31dbbf4676c776bc3d4237
 │   │   ├── ae/
 │   │   │   └── 628a4df3ce49fb860a818c0952ee18dbbb1830
 │   │   ├── af/
 │   │   │   └── cac881d4c095778ccdce3b2ce7ee3037810035
 │   │   ├── b4/
 │   │   │   └── c8046bfb6d6f986359b023586c86f2eae258c3
+│   │   ├── b5/
+│   │   │   └── 3cd004bb1ec443febfa40922f86c33d8b5cd97
+│   │   ├── b8/
+│   │   │   └── 75a547b4324590c3e3e2052d8bd441b1731eeb
 │   │   ├── b9/
 │   │   │   └── 295f8e8e66d0a38d864ecf495ec44b60167b7d
 │   │   ├── bd/
 │   │   │   └── 87cff8e755af25ed9749ee02d0d863116adcab
 │   │   ├── be/
 │   │   │   └── 5479df12cabada6d913758913f1b9e2ea97d0a
+│   │   ├── bf/
+│   │   │   ├── 56adf0bb22c7ac4674e900436b8d13dcbbe37e
+│   │   │   └── 9164765d9846dfa8e51c270cbce01282d88d8c
 │   │   ├── c6/
 │   │   │   └── 43ecfe177a519e28157f9525016937be9efd06
 │   │   ├── c8/
 │   │   │   └── 97f2eeca17a65e4aa478371d1e5d771063b2be
+│   │   ├── ce/
+│   │   │   └── e62108e4cfa7dd5f12ae5306a371ce192068c4
 │   │   ├── d3/
 │   │   │   └── 581b65e43f0e60b306fa6999c9fb0234e5cb9f
 │   │   ├── dc/
 │   │   │   └── 9920f389279b8959113adc1544439a5046001e
+│   │   ├── e0/
+│   │   │   └── 3c3dc75b0276ab471f12d019828aaef9e1aff6
 │   │   ├── e2/
-│   │   │   └── 9f2509174641edddc8c0460193b49fbddaf15c
+│   │   │   ├── 9f2509174641edddc8c0460193b49fbddaf15c
+│   │   │   └── 9f393c5d6c2f9ee6722821a4be2177d4fdba61
+│   │   ├── e6/
+│   │   │   ├── 343e4564fbfb51f33025378b9c0cbe88fa53f6
+│   │   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
 │   │   ├── e7/
 │   │   │   ├── 6952cf10a50808ff9de1d30866f366156a2ea7
 │   │   │   └── 8a4b14d4b40865e2c538163d649575ff5c6eac
@@ -136,8 +188,14 @@
 │   │   │   └── ad03142b15d3f414f67f9311e4f5e6522e2aa4
 │   │   ├── f5/
 │   │   │   └── aec5f1e26e162fa322046b0a1971b294b3c477
+│   │   ├── f7/
+│   │   │   └── e179aed6e82d1dff372ef98a57b85c76eb3d49
 │   │   ├── f8/
 │   │   │   └── 5ee819d2427445b67b904cd7baef1fb9025386
+│   │   ├── f9/
+│   │   │   └── 3e3a1a1525fb5b91020da86e44810c87a2d7bc
+│   │   ├── fc/
+│   │   │   └── 471119afac4e36ebe43c45958c6271b5840e5e
 │   │   ├── ff/
 │   │   │   └── f27f0b3d0f07203d8a03a560f4c7e960bb2555
 │   │   ├── info/
@@ -161,18 +219,35 @@
 │   └── api-capability-reference.json
 ├── artifacts/
 │   ├── README.md
+│   ├── immediate-task/
+│   │   └── ITI-1.0.0.txt
+│   ├── rehydration/
+│   │   └── RP-1.0.0.txt
 │   ├── scope-guardrail/
-│   │   └── .keep
+│   │   └── SG-1.0.0.txt
 │   └── ubp/
-│       └── .keep
+│       └── UBP-1.0.0.txt
 ├── current-tree.txt
 ├── data/
 │   ├── conversations.json
 │   └── runtime/
 │       └── README.md
 ├── docs/
+├── execution/
+│   ├── phase-1-artifact-loader-checklist.md
+│   ├── phase-2-prompt-assembly-checklist.md
+│   ├── phase-3-api-call-boundary-checklist.md
+│   ├── phase-4-persistence-hygiene-checklist.md
+│   └── phase-5-failure-semantics-checklist.md
 ├── governance/
-│   └── README.md
+│   ├── README.md
+│   └── user-model/
+│       ├── slice-a-cognitive-energy-constraints.md
+│       ├── slice-b-resource-budget-constraints.md
+│       ├── slice-c-technical-environment-skills.md
+│       ├── slice-d-workstyle-artifact-preference.md
+│       ├── slice-e-domain-focus-priorities.md
+│       └── slice-f-collaboration-household-context.md
 ├── index.html
 ├── main.js
 ├── node_modules/
@@ -6652,6 +6727,15 @@
 ├── package-lock.json
 ├── package.json
 ├── planning/
+│   └── vertical-slice/
+│       ├── 00-preconditions.md
+│       ├── 01-artifact-loader.md
+│       ├── 02-prompt-assembly.md
+│       ├── 03-api-boundary.md
+│       ├── 04-persistence-hygiene.md
+│       ├── 05-failure-semantics.md
+│       ├── README.md
+│       └── plan-outline.md
 ├── prompts/
 │   └── app-system-prompt.md
 ├── renderer.js
@@ -6659,4 +6743,4 @@
 ├── styles.css
 └── systemPrompt.js
 
-588 directories, 6072 files
+618 directories, 6126 files
