@@ -53,6 +53,12 @@
       "title": "Second Try Rename",
       "created_at": "2025-12-14T14:57:14.954Z",
       "updated_at": "2025-12-15T20:30:36.749Z"
+    },
+    {
+      "id": "ad0bb379-8fce-4203-844b-a134a07fb78f",
+      "title": "New Conversation",
+      "created_at": "2025-12-28T22:10:21.208Z",
+      "updated_at": "2025-12-28T22:10:22.849Z"
     }
   ],
   "messages": [
@@ -355,6 +361,18 @@
       "role": "assistant",
       "content": "Sounds like you might need a good boost! Are you looking for coffee recommendations, tips on making great coffee, or something else related to coffee?",
       "timestamp": "2025-12-15T20:31:42.500Z"
+    },
+    {
+      "conversation_id": "ad0bb379-8fce-4203-844b-a134a07fb78f",
+      "role": "user",
+      "content": "You there?",
+      "timestamp": "2025-12-28T22:10:21.233Z"
+    },
+    {
+      "conversation_id": "ad0bb379-8fce-4203-844b-a134a07fb78f",
+      "role": "assistant",
+      "content": "Yes, I'm here! How can I assist you today?",
+      "timestamp": "2025-12-28T22:10:22.849Z"
     }
   ]
 }

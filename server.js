@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
@@ -18,7 +19,6 @@ const CONTEXT_MAX_MESSAGES = 20;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 async function getAIResponse(conversationId, upToTimestamp) {
-
   const messages = store.messages
     .filter(
       (m) =>
@@ -31,7 +31,7 @@ async function getAIResponse(conversationId, upToTimestamp) {
       content: m.content,
     }));
 
-  console.log(messages)
+  console.log(messages);
   const response = await openai.chat.completions.create({
     model: MODEL,
     temperature: TEMPERATURE,
