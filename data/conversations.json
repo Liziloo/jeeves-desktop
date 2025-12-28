@@ -59,6 +59,12 @@
       "title": "New Conversation",
       "created_at": "2025-12-28T22:10:21.208Z",
       "updated_at": "2025-12-28T22:10:22.849Z"
+    },
+    {
+      "id": "2aa82f52-cc27-4130-954a-dc2f0110ad57",
+      "title": "New Conversation",
+      "created_at": "2025-12-28T22:48:57.203Z",
+      "updated_at": "2025-12-28T22:49:16.805Z"
     }
   ],
   "messages": [
@@ -373,6 +379,30 @@
       "role": "assistant",
       "content": "Yes, I'm here! How can I assist you today?",
       "timestamp": "2025-12-28T22:10:22.849Z"
+    },
+    {
+      "conversation_id": "2aa82f52-cc27-4130-954a-dc2f0110ad57",
+      "role": "user",
+      "content": "hi",
+      "timestamp": "2025-12-28T22:49:00.168Z"
+    },
+    {
+      "conversation_id": "2aa82f52-cc27-4130-954a-dc2f0110ad57",
+      "role": "assistant",
+      "content": "Hello. How can I assist you today?",
+      "timestamp": "2025-12-28T22:49:02.044Z"
+    },
+    {
+      "conversation_id": "2aa82f52-cc27-4130-954a-dc2f0110ad57",
+      "role": "user",
+      "content": "hi again",
+      "timestamp": "2025-12-28T22:49:15.273Z"
+    },
+    {
+      "conversation_id": "2aa82f52-cc27-4130-954a-dc2f0110ad57",
+      "role": "assistant",
+      "content": "Hello again. What would you like to discuss or do next?",
+      "timestamp": "2025-12-28T22:49:16.805Z"
     }
   ]
 }

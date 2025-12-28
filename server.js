@@ -6,6 +6,8 @@ const crypto = require("crypto");
 const cors = require("cors");
 const OpenAI = require("openai");
 
+const systemPrompt = require("./systemPrompt");
+
 if (!process.env.OPENAI_API_KEY) {
   throw new Error("OPENAI_API_KEY not set");
 }
@@ -19,7 +21,7 @@ const CONTEXT_MAX_MESSAGES = 20;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 async function getAIResponse(conversationId, upToTimestamp) {
-  const messages = store.messages
+  const historyMessages = store.messages
     .filter(
       (m) =>
         m.conversation_id === conversationId && m.timestamp <= upToTimestamp
@@ -31,7 +33,16 @@ async function getAIResponse(conversationId, upToTimestamp) {
       content: m.content,
     }));
 
-  console.log(messages);
+  const messages = [
+    { role: "system", content: systemPrompt },
+    ...historyMessages,
+  ];
+
+  console.log(
+    messages[0].role,
+    crypto.createHash("sha256").update(messages[0].content).digest("hex")
+  );
+
   const response = await openai.chat.completions.create({
     model: MODEL,
     temperature: TEMPERATURE,
@@ -40,6 +51,7 @@ async function getAIResponse(conversationId, upToTimestamp) {
 
   return response.choices[0].message.content;
 }
+
 
 const app = express();
 const PORT = 3000;
