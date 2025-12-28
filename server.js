@@ -38,18 +38,18 @@ async function getAIResponse(conversationId, upToTimestamp) {
     ...historyMessages,
   ];
 
-  console.log(
-    messages[0].role,
-    crypto.createHash("sha256").update(messages[0].content).digest("hex")
-  );
-
-  const response = await openai.chat.completions.create({
+  const response = await openai.responses.create({
     model: MODEL,
     temperature: TEMPERATURE,
-    messages,
+    input: messages.map((m) => ({
+      role: m.role,
+      content: [{ type: "text", text: m.content }],
+    })),
   });
 
-  return response.choices[0].message.content;
+
+  return response.output_text;
+
 }
 
 
